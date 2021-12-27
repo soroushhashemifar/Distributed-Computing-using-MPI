@@ -8,7 +8,7 @@
 *  
 *
 * For 8 processes, just run this:
-* mpicc -o test 1.c -lm
+* mpicc -o test mpi_sqrt_matrix.c -lm
 * mpirun -np 8 ./test
 * 
 ************************************************************************************************/
