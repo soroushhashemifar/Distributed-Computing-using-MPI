@@ -26,7 +26,7 @@ void printArray(); // print the content of output matrix [C];
 
 int rank; // process rank
 int size; // number of processes
-int i, j, k; // helper variables
+int i, j; // helper variables
 double mat_a[NUM_ROWS_A][NUM_COLUMNS_A]; // declare input [A]
 double mat_result[NUM_ROWS_A][NUM_COLUMNS_A]; // declare output [C]
 double start_time; // hold start time
@@ -44,13 +44,13 @@ int main(int argc, char *argv[]) {
 
     /* master initializes work */
     if (rank == 0) {
+        start_time = MPI_Wtime();
+        
         for (i = 0; i < NUM_ROWS_A; i++) {
             for (j = 0; j < NUM_COLUMNS_A; j++) {
                 mat_a[i][j] = i * j;
             }
         }
-
-        start_time = MPI_Wtime();
 
         for (i = 1; i < size; i++) { // for each slave other than the master
             portion = NUM_ROWS_A / (size - 1); // calculate portion without master

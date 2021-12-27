@@ -15,31 +15,31 @@
 #include <math.h>
 
 long niter = 100000000;
-int rank;                       //holds process's rank id
-double x, y;                     //x,y value for the random coordinate
-int i, count=0;                 //Count holds all the number of how many good coordinates
-double pi;                      //holds approx value of pi
+int rank;                       // holds process's rank id
+double x, y;                     // x,y value for the random coordinate
+int i, count=0;                 // Count holds all the number of how many good coordinates
+double pi;                      // holds approx value of pi
 int size;
 double start_time; // hold start time
 double end_time; // hold end time
 MPI_Status status; // store status of a MPI_Recv
-MPI_Request request; //capture request of a MPI_Isend
+MPI_Request request; // capture request of a MPI_Isend
 
 int main(int argc, char* argv[]) {
-    MPI_Init(&argc, &argv);                 //Start MPI
-    MPI_Comm_rank(MPI_COMM_WORLD, &rank);           //get rank of node's process
+    MPI_Init(&argc, &argv);                 // Start MPI
+    MPI_Comm_rank(MPI_COMM_WORLD, &rank);           // get rank of node's process
     MPI_Comm_size(MPI_COMM_WORLD, &size);
     
     int recieved[size];
-    srand(4);                       //Give rand() a seed value. Needs to be different on each node
+    srand(4);                       // Give rand() a seed value. Needs to be different on each node
 
     if (rank != 0) {
         for (i=0; i < niter / size; i++) {
-            x = ((double) rand()) / RAND_MAX;           //gets a random x coordinate
-            y = ((double) rand()) / RAND_MAX;           //gets a random y coordinate
+            x = ((double) rand()) / RAND_MAX;           // gets a random x coordinate
+            y = ((double) rand()) / RAND_MAX;           // gets a random y coordinate
             //Checks to see if number in inside unit circle
             if (sqrt(x*x + y*y) <= 1) {
-                count++;                //if it is, consider it a valid random point
+                count++;                // if it is, consider it a valid random point
             }
         }
 
@@ -52,11 +52,11 @@ int main(int argc, char* argv[]) {
         int finalcount = 0;
 
         for (i=0; i < niter / size; i++) {
-            x = ((double) rand()) / RAND_MAX;           //gets a random x coordinate
-            y = ((double) rand()) / RAND_MAX;           //gets a random y coordinate
-            //Checks to see if number in inside unit circle
+            x = ((double) rand()) / RAND_MAX;           // gets a random x coordinate
+            y = ((double) rand()) / RAND_MAX;           // gets a random y coordinate
+            // Checks to see if number in inside unit circle
             if (sqrt(x*x + y*y) <= 1) {
-                finalcount++;                //if it is, consider it a valid random point
+                finalcount++;                // if it is, consider it a valid random point
             }
         }
 
@@ -69,7 +69,7 @@ int main(int argc, char* argv[]) {
         
         end_time = MPI_Wtime();
         printf("\nRunning Time = %f\n\n", end_time - start_time);
-        printf("Pi: %f\n", pi);             //Print the calculated value of pi
+        printf("Pi: %f\n", pi);             // Print the calculated value of pi
  
     }
  
