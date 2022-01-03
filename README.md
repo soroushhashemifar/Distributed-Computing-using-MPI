@@ -1,4 +1,4 @@
-# Matrix-Square-Root-Program-using-MPI
+# Distributed-Computing-using-MPI
 
 The latest version of MPICH is available at https://www.mpich.org/downloads/.
 
